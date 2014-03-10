@@ -21,7 +21,6 @@ from tweepy.cursor import Cursor
 api = API()
 
 def debug(enable=True, level=1):
-
-    import httplib
-    httplib.HTTPConnection.debuglevel = level
-
+    import logging
+    urllib3_logger = logging.getLogger('urllib3')
+    urllib3_logger.setLevel(level)
