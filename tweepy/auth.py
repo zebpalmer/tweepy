@@ -1,9 +1,10 @@
 #Embedded file name: /home/aaron/repos/tweepy/tweepy/auth.py
+import six
 from tweepy.error import TweepError
 from tweepy.api import API
 import requests
 from requests_oauthlib import OAuth1Session, OAuth1
-from urlparse import parse_qs
+from six.moves.urllib.parse import parse_qs
 
 class AuthHandler(object):
 
