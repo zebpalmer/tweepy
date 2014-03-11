@@ -3,7 +3,7 @@
 # See LICENSE for details.
 
 import requests
-import urllib
+from six.moves.urllib import parse
 import time
 import re
 
@@ -95,7 +95,7 @@ def bind_api(**config):
                     value = self.api.auth.get_username()
                 else:
                     try:
-                        value = urllib.quote(self.session.params[name])
+                        value = parse.quote(self.session.params[name])
                     except KeyError:
                         raise TweepError('No parameter value found for path variable: %s' % name)
                     del self.session.params[name]
