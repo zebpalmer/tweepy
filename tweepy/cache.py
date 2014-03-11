@@ -7,10 +7,7 @@ import datetime
 import threading
 import os
 
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
+from six.moves import cPickle as pickle
 
 try:
     import hashlib
