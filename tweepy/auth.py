@@ -24,10 +24,10 @@ class OAuthHandler(AuthHandler):
 
     def __init__(self, consumer_key, consumer_secret, callback=None, secure=True):
         if type(consumer_key) == six.text_type:
-            consumer_key = six.binary_type(consumer_key)
+            consumer_key = six.binary_type(consumer_key, 'utf-8')
 
         if type(consumer_secret) == six.text_type:
-            consumer_secret = six.binary_type(consumer_secret)
+            consumer_secret = six.binary_type(consumer_secret, 'utf-8')
 
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
