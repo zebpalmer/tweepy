@@ -51,7 +51,7 @@ class JSONParser(Parser):
         except Exception as e:
             raise TweepError('Failed to parse JSON payload: %s' % e)
 
-        needsCursors = method.session.params.has_key('cursor')
+        needsCursors = 'cursor' in method.session.params
         if needsCursors and isinstance(json, dict) and 'previous_cursor' in json and 'next_cursor' in json:
             cursors = json['previous_cursor'], json['next_cursor']
             return json, cursors
@@ -60,7 +60,7 @@ class JSONParser(Parser):
 
     def parse_error(self, payload):
         error = self.json_lib.loads(payload)
-        if error.has_key('error'):
+        if 'error' in error:
             return error['error']
         else:
             return error['errors']
