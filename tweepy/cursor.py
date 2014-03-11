@@ -46,6 +46,10 @@ class BaseIterator(object):
     def prev(self):
         raise NotImplementedError
 
+    def __next__(self):
+        # Python 3 compatibility
+        return self.next()
+
     def __iter__(self):
         return self
 
