@@ -6,7 +6,7 @@ from tweepy.auth import OAuthHandler
 from tweepy.models import Status
 from tweepy.streaming import Stream, StreamListener
 
-from config import create_auth
+from .config import create_auth
 from test_utils import mock_tweet
 from mock import MagicMock, patch
 

@@ -2,7 +2,7 @@ import unittest2 as unittest
 
 from tweepy import API, Cursor
 
-from config import create_auth
+from .config import create_auth
 
 class TweepyCursorTests(unittest.TestCase):
 

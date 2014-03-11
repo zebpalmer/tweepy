@@ -6,7 +6,7 @@ import os
 from nose import SkipTest
 
 from tweepy import Friendship, MemoryCache, FileCache
-from config import TweepyTestCase, username, use_replay
+from .config import TweepyTestCase, username, use_replay
 
 test_tweet_id = '266367358078169089'
 tweet_text = 'testing 1000'

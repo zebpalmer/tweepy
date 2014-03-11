@@ -1,6 +1,6 @@
 import unittest2 as unittest
 
-from config import *
+from .config import *
 from tweepy import API, OAuthHandler
 
 class TweepyAuthTests(unittest.TestCase):
