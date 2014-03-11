@@ -6,7 +6,8 @@ from datetime import datetime
 import time
 import re
 import locale
-from urllib import quote
+import six
+from six.moves.urllib.parse import quote
 from email.utils import parsedate
 
 
