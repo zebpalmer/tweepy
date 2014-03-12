@@ -133,12 +133,12 @@ def bind_api(**config):
                     self.session.headers['Accept-encoding'] = 'gzip'
 
                 # Execute request
-                try:
-                    resp = self.session.request(self.method, full_url,
+                #try:
+                resp = self.session.request(self.method, full_url,
                             data=self.post_data, timeout=self.api.timeout,
                             auth=auth)
-                except Exception as e:
-                    raise TweepError('Failed to send request: %s' % e)
+                    #except Exception as e:
+                    #raise TweepError('Failed to send request: %s' % e)
 
                 # Exit request loop if non-retry error code
                 if self.retry_errors:
