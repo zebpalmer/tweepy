@@ -36,6 +36,7 @@ def bind_api(**config):
 
             self.api = api
             self.post_data = kargs.pop('post_data', None)
+            self.files = kargs.pop('files', None)
             self.retry_count = kargs.pop('retry_count', api.retry_count)
             self.retry_delay = kargs.pop('retry_delay', api.retry_delay)
             self.retry_errors = kargs.pop('retry_errors', api.retry_errors)
@@ -136,7 +137,7 @@ def bind_api(**config):
                 #try:
                 resp = self.session.request(self.method, full_url,
                             data=self.post_data, timeout=self.api.timeout,
-                            auth=auth)
+                            files=self.files, auth=auth)
                     #except Exception as e:
                     #raise TweepError('Failed to send request: %s' % e)
 

@@ -91,8 +91,8 @@ class API(object):
 
     """ statuses/update_with_media """
     def update_with_media(self, filename, *args, **kwargs):
-        headers, post_data = API._pack_image(filename, 3072, form_field='media[]')
-        kwargs.update({'headers': headers, 'post_data': post_data})
+        files = API._pack_image(filename, 3072, form_field='media[]')
+        kwargs.update({'files': files})
 
         return bind_api(
             path='/statuses/update_with_media.json',
@@ -364,34 +364,34 @@ class API(object):
 
     """ account/update_profile_image """
     def update_profile_image(self, filename):
-        headers, post_data = API._pack_image(filename, 700)
+        files = API._pack_image(filename, 700)
         return bind_api(
             path = '/account/update_profile_image.json',
             method = 'POST',
             payload_type = 'user',
             require_auth = True
-        )(self, post_data=post_data, headers=headers)
+        )(self, files=files)
 
     """ account/update_profile_background_image """
     def update_profile_background_image(self, filename, *args, **kargs):
-        headers, post_data = API._pack_image(filename, 800)
+        files = API._pack_image(filename, 800)
         bind_api(
             path = '/account/update_profile_background_image.json',
             method = 'POST',
             payload_type = 'user',
             allowed_param = ['tile'],
             require_auth = True
-        )(self, post_data=post_data, headers=headers)
+        )(self, files=files)
 
     """ account/update_profile_banner """
     def update_profile_banner(self, filename, *args, **kargs):
-        headers, post_data = API._pack_image(filename, 700, form_field="banner")
+        files = API._pack_image(filename, 700, form_field="banner")
         bind_api(
             path = '/account/update_profile_banner.json',
             method = 'POST',
             allowed_param = ['width', 'height', 'offset_left', 'offset_right'],
             require_auth = True
-        )(self, post_data=post_data, headers=headers)
+        )(self, files=files)
 
 
     """ account/update_profile """
@@ -716,25 +716,4 @@ class API(object):
         if file_type not in ['image/gif', 'image/jpeg', 'image/png']:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
-        # build the mulitpart-formdata body
-        fp = open(filename, 'rb')
-        BOUNDARY = 'Tw3ePy'
-        body = []
-        body.append('--' + BOUNDARY)
-        body.append('Content-Disposition: form-data; name="%s"; filename="%s"' % (form_field, filename))
-        body.append('Content-Type: %s' % file_type)
-        body.append('')
-        body.append(fp.read())
-        body.append('--' + BOUNDARY + '--')
-        body.append('')
-        fp.close()
-        body = '\r\n'.join(body)
-
-        # build headers
-        headers = {
-            'Content-Type': 'multipart/form-data; boundary=Tw3ePy',
-            'Content-Length': str(len(body))
-        }
-
-        return headers, body
-
+        return {form_field: open(filename, 'rb')}
