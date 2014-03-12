@@ -6,6 +6,7 @@ import time
 import datetime
 import threading
 import os
+import six
 
 from six.moves import cPickle as pickle
 
@@ -157,6 +158,8 @@ class FileCache(Cache):
             self._unlock_file = self._unlock_file_dummy
 
     def _get_path(self, key):
+        if isinstance(key, six.text_type):
+            key = key.encode('utf-8')
         md5 = hashlib.md5()
         md5.update(key)
         return os.path.join(self.cache_dir, md5.hexdigest())
