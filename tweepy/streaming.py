@@ -259,7 +259,7 @@ class Stream(object):
             self.parameters['locations'] = ','.join(['%.2f' % l for l in locations])
         if track:
             encoded_track = [s.encode(encoding) for s in track]
-            self.parameters['track'] = ','.join(encoded_track)
+            self.parameters['track'] = b','.join(encoded_track)
 
         self._start(async)
 
@@ -297,10 +297,10 @@ class Stream(object):
         self.url = '/%s/statuses/filter.json' % STREAM_VERSION
         if follow:
             encoded_follow = [s.encode(encoding) for s in follow]
-            self.parameters['follow'] = ','.join(encoded_follow)
+            self.parameters['follow'] = b','.join(encoded_follow)
         if track:
             encoded_track = [s.encode(encoding) for s in track]
-            self.parameters['track'] = ','.join(encoded_track)
+            self.parameters['track'] = b','.join(encoded_track)
         if locations and len(locations) > 0:
             assert len(locations) % 4 == 0
             self.parameters['locations'] = ','.join(['%.2f' % l for l in locations])
