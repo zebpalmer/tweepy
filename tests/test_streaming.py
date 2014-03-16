@@ -17,8 +17,15 @@ class MockStreamListener(StreamListener):
         self.status_count = 0
         self.status_stop_count = 0
         self.connect_cb = None
+        print("Initialized!")
+
+
+    def on_data(self, data):
+        print("Data!")
+        super(MockStreamListener, self).on_data(data)
 
     def on_connect(self):
+        print("Connected!")
         if self.connect_cb:
             self.connect_cb()
 
@@ -31,6 +38,7 @@ class MockStreamListener(StreamListener):
         return True
 
     def on_status(self, status):
+        print("Status!")
         self.status_count += 1
         self.test_case.assertIsInstance(status, Status)
         if self.status_stop_count == self.status_count:

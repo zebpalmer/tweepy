@@ -207,7 +207,9 @@ class Stream(object):
             # Note: keep-alive newlines might be inserted before each length value.
             # read until we get a digit...
             c = '\n'
+            print("Character first!")
             for c in resp.iter_content():
+                print("Character!")
                 if c == '\n':
                     continue
                 break
